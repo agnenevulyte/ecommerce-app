@@ -16,11 +16,18 @@ export default class App extends Component {
     };
   }
 
+  unsubscribeFromAuth = null;
+
   componentDidMount() {
     auth.onAuthStateChanged((user) => {
       this.setState({currentUser: user});
       console.log('cur---', user);
     });
+  }
+
+  // close the subscription
+  componentWillUnmount() {
+    this.unsubscribeFromAuth();
   }
 
   render() {
