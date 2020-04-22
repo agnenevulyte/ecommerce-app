@@ -32,6 +32,7 @@ export default class App extends Component {
             //   console.log('this.state--------', this.state);
             // }
           );
+          // console.log('this.state App.js---------------', this.state);
         });
       }
       this.setState({currentUser: userAuth});
