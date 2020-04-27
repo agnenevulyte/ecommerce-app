@@ -18,9 +18,17 @@ const mapDispatchToProps = (dispatch) => ({
   toggleCartHidden: () => dispatch(toggleCartHidden()),
 });
 
+// const mapStateToProps = ({cart: {cartItems}}) => ({
+//   // it will accumulate all the number values of the quantities of all the cartItems
+//   // selector in Redux not good for performance
+//   itemCount: cartItems.reduce(
+//     (accumulatedQuantity, cartItem) =>
+//       accumulatedQuantity + cartItem.quantity,
+//     0
+//   )
+// });
+
 const mapStateToProps = (state) => ({
-  // it will accumulate all the number values of the quantities of all the cartItems
-  // selector in Redux
   itemCount: selectCartItemsCount(state),
 });
 
