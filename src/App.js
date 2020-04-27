@@ -3,10 +3,13 @@ import {Switch, Route, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {createStructuredSelector} from 'reselect';
 import './App.css';
+
 import Homepage from './pages/homepage/Homepage';
 import ShopPage from './pages/shop/ShopPage';
-import Header from './components/header/Header';
 import SignInAndSignUp from './pages/sign-in-and-sign-up/SignInAndSignUpPage';
+import CheckoutPage from './pages/checkout/CheckoutPage';
+
+import Header from './components/header/Header';
 import {selectCuttentUser} from './redux/user/user.selectors';
 import {auth, createUserProfileDocument} from './firebase/firebase.utils';
 import {setCurrentUser} from './redux/user/userActions';
@@ -26,12 +29,6 @@ class App extends Component {
             id: snapShot.id,
             ...snapShot.data(),
           });
-          // this.setState({
-          //   currentUser: {
-          //     id: snapShot.id,
-          //     ...snapShot.data()
-          //   }
-          // });
         });
       }
       setCurrentUser(userAuth);
@@ -50,6 +47,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Homepage} />
           <Route path="/shop" component={ShopPage} />
+          <Route exact path="/checkout" component={CheckoutPage} />
           <Route
             exact
             path="/signin"
