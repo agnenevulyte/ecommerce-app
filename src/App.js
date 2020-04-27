@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Switch, Route, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
+import {createStructuredSelector} from 'reselect';
 import './App.css';
 import Homepage from './pages/homepage/Homepage';
 import ShopPage from './pages/shop/ShopPage';
@@ -63,8 +64,8 @@ class App extends Component {
 }
 
 // we have access to this.props.currentUser
-const mapStateToProps = (state) => ({
-  currentUser: selectCuttentUser(state),
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCuttentUser,
 });
 
 const mapDispatchToProps = (dispatch) => ({
