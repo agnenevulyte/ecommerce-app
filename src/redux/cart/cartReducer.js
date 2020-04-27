@@ -10,12 +10,12 @@ const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case CartActionTypes.TOGGLE_CART_HIDDEN:
       return {
-        ...initialState,
+        ...state,
         hidden: !state.hidden,
       };
     case CartActionTypes.ADD_ITEM:
       return {
-        ...initialState,
+        ...state,
         // action.payload is the item we want to add
         cartItems: addItemToCart(state.cartItems, action.payload),
       };
