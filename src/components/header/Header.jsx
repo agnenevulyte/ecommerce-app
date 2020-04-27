@@ -5,6 +5,8 @@ import {auth} from '../../firebase/firebase.utils';
 import {ReactComponent as Logo} from '../../assets/original.svg';
 import CartIcon from '../cart-icon/CartIcon';
 import CartDropdown from '../cart-dropdown/CartDropdown';
+import {selectCuttentUser} from '../../redux/user/user.selectors';
+import {selectCartHidden} from '../../redux/cart/cart.selectors';
 import './header.styles.scss';
 
 function Header({currentUser, hidden}) {
@@ -36,10 +38,9 @@ function Header({currentUser, hidden}) {
   );
 }
 
-// takes state, then takes user from rootReducer.js, then takes currentUser from userReducer.js
-const mapStateToProps = ({user: {currentUser}, cart: {hidden}}) => ({
-  currentUser,
-  hidden,
+const mapStateToProps = (state) => ({
+  currentUser: selectCuttentUser(state),
+  hidden: selectCartHidden(state),
 });
 
 export default connect(mapStateToProps)(Header);

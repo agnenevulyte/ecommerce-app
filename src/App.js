@@ -6,6 +6,7 @@ import Homepage from './pages/homepage/Homepage';
 import ShopPage from './pages/shop/ShopPage';
 import Header from './components/header/Header';
 import SignInAndSignUp from './pages/sign-in-and-sign-up/SignInAndSignUpPage';
+import {selectCuttentUser} from './redux/user/user.selectors';
 import {auth, createUserProfileDocument} from './firebase/firebase.utils';
 import {setCurrentUser} from './redux/user/userActions';
 
@@ -62,8 +63,8 @@ class App extends Component {
 }
 
 // we have access to this.props.currentUser
-const mapStateToProps = ({user}) => ({
-  currentUser: user.currentUser,
+const mapStateToProps = (state) => ({
+  currentUser: selectCuttentUser(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
