@@ -20,7 +20,7 @@ class App extends Component {
   componentDidMount() {
     const {setCurrentUser} = this.props;
     // storing user data in our app
-    auth.onAuthStateChanged(async (userAuth) => {
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
 
