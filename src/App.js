@@ -11,15 +11,14 @@ import CheckoutPage from './pages/checkout/CheckoutPage';
 
 import Header from './components/header/Header';
 import { selectCuttentUser } from './redux/user/user.selectors';
-import { auth, createUserProfileDocument, addCollectionAndDocuments } from './firebase/firebase.utils';
+import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/userActions';
-import { selectCollectionsForPreview } from './redux/shop/shop.selectors';
 
 class App extends Component {
 	unsubscribeFromAuth = null;
 
 	componentDidMount() {
-		const { setCurrentUser, collectionsArray } = this.props;
+		const { setCurrentUser } = this.props;
 		// storing user data in our app
 		this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
 			if (userAuth) {
@@ -33,8 +32,6 @@ class App extends Component {
 				});
 			}
 			setCurrentUser(userAuth);
-			// returning an array with the values we want to keep, otherwise we would return just collectionsArray
-			addCollectionAndDocuments('collections', collectionsArray.map(({ title, items }) => ({ title, items })));
 		});
 	}
 
@@ -64,8 +61,7 @@ class App extends Component {
 
 // we have access to this.props.currentUser
 const mapStateToProps = createStructuredSelector({
-	currentUser: selectCuttentUser,
-	collectionsArray: selectCollectionsForPreview
+	currentUser: selectCuttentUser
 });
 
 const mapDispatchToProps = (dispatch) => ({
