@@ -27,13 +27,21 @@ class ShopPage extends React.Component {
 		// whenever the collectionRef updates or runs for the first time this collectionRef
 		// will send us a snapshot representing the object of the collections array
 		// at the time when this code renders
-		this.unsubscribeFromSnapshot = collectionRef.onSnapshot(async (snapshot) => {
+		// .get() makes an API call to fetch back the data associated to the collectionRef
+		collectionRef.get().then((snapshot) => {
 			console.log('snapShot-----', snapshot);
 			const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
 			updateCollections(collectionsMap);
 			this.setState({ loading: false });
-		});
+		})
+
+		// or we can use fetch
+		// fetch('https://firestore.googleapis.com/v1/projects/crwn-db-23cfc/databases/(default)/documents/collections')
+		// .then(response => response.json())
+		// .then(collections => console.log('fetch collections-------', collections))
 	}
+	
+	
 
 	render() {
 		const { match } = this.props;
